@@ -1,7 +1,10 @@
 import React from 'react'
 import { Platform, StatusBar, StyleSheet, View } from 'react-native'
+import NativeTachyons from 'react-native-style-tachyons'
 import { AppLoading, Asset, Font, Icon } from 'expo'
 import AppNavigator from './navigation/app-navigator'
+
+NativeTachyons.build({}, StyleSheet)
 
 export default class App extends React.Component {
     state = {

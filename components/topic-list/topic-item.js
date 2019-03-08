@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import { styles as commonStyles } from 'react-native-style-tachyons'
 import moment from 'moment'
+import Badge from './badge'
 
 const styles = StyleSheet.create({
     secondColor: {
@@ -29,59 +30,41 @@ const styles = StyleSheet.create({
     infoView: {
         flex: 1
     },
-    title: {
-        fontSize: 16,
-        margin: 'auto'
-    },
-    modal: {
-        alignItems: 'center',
-        flex: 1,
-        alignContent: 'center'
-    },
-    modalContent: {
-        margin: 'auto',
-        backgroundColor: 'red'
-    },
+    title: {},
     subInfo: {
         flexDirection: 'row',
         justifyContent: 'flex-end'
     }
 })
 
-
 export default class TopicItem extends React.Component {
     constructor(props) {
         super(props)
     }
 
-    state = {
-        visible: false
-    }
+    state = {}
 
     _goDetail(id) {
-        this.setState({
-            visible: true
-        })
     }
 
     render() {
-        const { author, title, create_at, top, visit_count } = this.props.data
+        const { author, title, create_at, top, good, visit_count } = this.props.data
+        const { f5, h3, w3, mb2, mr2, mv1, mr1, mb1, pa2, tr, jcfe, flx_i, flx_row } = commonStyles
         const item = (
-            <View style={[styles.item]}>
-                <Image style={styles.avatar} source={{ uri: author.avatar_url }}/>
-                <View style={styles.infoView}>
-                    <Text style={styles.title}>{title}</Text>
-                    <View>
-                    </View>
-                    <View style={styles.subInfo}>
-                        <Text style={styles.secondColor}>
+            <View style={[flx_row, mb2, pa2]}>
+                <Image style={[w3, h3, mr2]} source={{ uri: author.avatar_url }}/>
+                <View style={[flx_i]}>
+                    <Text style={[f5, mb1]}>{title}</Text>
+                    <Badge top={top} good={good}/>
+                    <View style={[flx_row, jcfe, mv1]}>
+                        <Text style={[styles.secondColor, mr1]}>
                             {author.loginname}
                         </Text>
                         <Text style={styles.secondColor}>
                             {moment(create_at).format('YYYY-MM-DD HH:mm:ss')}
                         </Text>
                     </View>
-                    <Text style={[styles.secondColor, commonStyles.tr]}>阅读: {visit_count}</Text>
+                    <Text style={[styles.secondColor, tr]}>阅读: {visit_count}</Text>
                 </View>
             </View>
         )
@@ -97,15 +80,6 @@ export default class TopicItem extends React.Component {
                 </TouchableOpacity>
             )
         }
-        return (
-            <>
-                {platform[Platform.OS]}
-                <Modal transparent={true} visible={this.state.visible} style={styles.modal}>
-                    <View style={styles.modalContent}>
-                        <Text>I am the modal content!</Text>
-                    </View>
-                </Modal>
-            </>
-        )
+        return platform[Platform.OS]
     }
 }

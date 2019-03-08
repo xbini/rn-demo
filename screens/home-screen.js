@@ -11,7 +11,6 @@ import { API } from '../constants/api'
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10
     }
 })
 
