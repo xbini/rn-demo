@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
-import { MonoText } from '../components/StyledText';
+import { MonoText } from '../components/styled-text/styled-text';
 
-export default class HomeScreen extends React.Component {
+export default class HelpScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };

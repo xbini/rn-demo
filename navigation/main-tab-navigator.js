@@ -2,18 +2,32 @@ import React from 'react'
 import { Platform } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 
-import TabBarIcon from '../components/TabBarIcon'
-import HomeScreen from '../screens/HomeScreen'
-import LinksScreen from '../screens/LinksScreen'
-import SettingsScreen from '../screens/SettingsScreen'
-import FormScreen from '../screens/FormScreen'
+import TabBarIcon from '../components/tab-bar-icon/tab-bar-icon'
+import HomeScreen from '../screens/home-screen'
+import HelpScreen from '../screens/help-screen'
+import LinksScreen from '../screens/links-screen'
+import SettingsScreen from '../screens/settings-screen'
 
 const HomeStack = createStackNavigator({
-    Home: HomeScreen
+    Form: HomeScreen
 })
 
 HomeStack.navigationOptions = {
-    tabBarLabel: 'Home',
+    tabBarLabel: '主页',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+        />
+    )
+}
+
+const HelpStack = createStackNavigator({
+    Home: HelpScreen
+})
+
+HelpStack.navigationOptions = {
+    tabBarLabel: 'Help',
     tabBarIcon: ({ focused }) => (
         <TabBarIcon
             focused={focused}
@@ -54,23 +68,9 @@ SettingsStack.navigationOptions = {
     )
 }
 
-const FormStack = createStackNavigator({
-    Form: FormScreen
-})
-
-FormStack.navigationOptions = {
-    tabBarLabel: 'Form',
-    tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-            focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-        />
-    )
-}
-
 export default createBottomTabNavigator({
-    FormStack,
     HomeStack,
+    HelpStack,
     LinksStack,
     SettingsStack
 })
