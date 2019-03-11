@@ -15,25 +15,14 @@ import moment from 'moment'
 import Badge from './badge'
 
 const styles = StyleSheet.create({
+    title: {
+        overflow: 'hidden'
+    },
     secondColor: {
-        color: '#909090'
+        color: '#666'
     },
-    item: {
-        flexDirection: 'row',
-        paddingBottom: 10
-    },
-    avatar: {
-        width: 80,
-        height: 80,
-        marginRight: 10
-    },
-    infoView: {
-        flex: 1
-    },
-    title: {},
-    subInfo: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end'
+    replyText: {
+        color: '#cc45b5'
     }
 })
 
@@ -48,18 +37,21 @@ export default class TopicItem extends React.Component {
     }
 
     render() {
-        const { author, title, create_at, top, good, visit_count } = this.props.data
-        const { aic, f5, h3, w3, mb2, mr2, mt1, mb1, pa2, tr, jcsb, flx_i, flx_row } = commonStyles
+        const { author, title, reply_count, create_at, top, tab, good, visit_count } = this.props.data
+        const { aic, f5, h3, w3, mb2, mr2, mt1, mb1, pa2, jcsb, flx_i, flx_row } = commonStyles
         const item = (
             <View style={[flx_row, aic, mb2, pa2]}>
                 <Image style={[w3, h3, mr2]} source={{ uri: author.avatar_url }}/>
                 <View style={[flx_i]}>
                     <Text style={[f5, mb1]}>{title}</Text>
-                    <Badge top={top} good={good}/>
+                    <Badge top={top} good={good} tab={tab}/>
                     <View style={[flx_row, jcsb, mt1]}>
-                        <Text style={[styles.secondColor, tr]}>阅读: {visit_count}</Text>
+                        <View style={[flx_row]}>
+                            <Text style={styles.replyText}>{reply_count}</Text>
+                            <Text style={styles.secondColor}>/{visit_count}</Text>
+                        </View>
                         <Text style={styles.secondColor}>
-                            {moment(create_at).format('YYYY/MM/DD HH:mm')}
+                            {moment(create_at).fromNow()}
                         </Text>
                     </View>
                 </View>

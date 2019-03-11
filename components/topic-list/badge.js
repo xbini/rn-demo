@@ -12,6 +12,9 @@ const style = StyleSheet.create({
         fontSize: 12
     },
 
+    tab: {
+        backgroundColor: '#ccc'
+    },
     top: {
         backgroundColor: '#16dd27'
     },
@@ -30,15 +33,26 @@ export default class Badge extends React.Component {
             top: '置顶',
             good: '精华'
         }
+        const tabText = {
+            share: '分享',
+            ask: '问答'
+        }
         const { ml2, pl3, pr3, pt1, pb1, br5 } = commonStyles
         const badgeStyle = [ml2, pl3, pr3, pt1, pb1, br5]
         const exist = Object.keys(slogan).filter(item => this.props[item])
-        return exist.map((item, index) =>
-            <View style={[...badgeStyle, style[item]]} key={index}>
-                <Text style={style.badge}>{slogan[item]}</Text>
+        if (exist.length > 0) {
+            return exist.map((item, index) =>
+                <View style={[...badgeStyle, style[item]]} key={index}>
+                    <Text style={style.badge}>{slogan[item]}</Text>
+                </View>
+            )
+        }
+        const { tab } = this.props
+        return (
+            <View style={[...badgeStyle, style.tab]}>
+                <Text style={style.badge}>{tabText[tab]}</Text>
             </View>
         )
-
     }
 
     render() {

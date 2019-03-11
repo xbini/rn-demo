@@ -1,4 +1,5 @@
 import React from 'react'
+import 'moment/locale/zh-cn'
 import { Platform, StatusBar, StyleSheet, View } from 'react-native'
 import NativeTachyons from 'react-native-style-tachyons'
 import { AppLoading, Asset, Font, Icon } from 'expo'

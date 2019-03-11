@@ -8,7 +8,7 @@ export default class TopicList extends React.Component {
     }
 
     render() {
-        // console.log(this.props.list)
+        console.log(this.props.list)
         return (
             <FlatList data={this.props.list}
                       renderItem={({ item }) => <TopicItem data={item}/>}
