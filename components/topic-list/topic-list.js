@@ -31,11 +31,12 @@ export default class TopicList extends React.Component {
 
     render() {
         console.log(this.state.list)
+        const { navigation } = this.props
         const refreshControl = <RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh}/>
         return (
             <FlatList refreshControl={refreshControl}
                       data={this.state.list}
-                      renderItem={({ item }) => <TopicItem data={item}/>}
+                      renderItem={({ item }) => <TopicItem data={item} navigation={navigation}/>}
                       keyExtractor={(item) => item.id}>
             </FlatList>
         )

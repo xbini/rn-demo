@@ -7,70 +7,66 @@ import HomeScreen from '../screens/home-screen'
 import HelpScreen from '../screens/help-screen'
 import LinksScreen from '../screens/links-screen'
 import SettingsScreen from '../screens/settings-screen'
+import { PALETTE } from '../theme/theme'
 
 const HomeStack = createStackNavigator({
-    Form: HomeScreen
+    Home: HomeScreen
 })
-
-HomeStack.navigationOptions = {
-    tabBarLabel: '主页',
-    tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-            focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
-        />
-    )
-}
 
 const HelpStack = createStackNavigator({
-    Home: HelpScreen
+    Help: HelpScreen
 })
-
-HelpStack.navigationOptions = {
-    tabBarLabel: 'Help',
-    tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-            focused={focused}
-            name={
-                Platform.OS === 'ios'
-                    ? `ios-information-circle${focused ? '' : '-outline'}`
-                    : 'md-information-circle'
-            }
-        />
-    )
-}
 
 const LinksStack = createStackNavigator({
     Links: LinksScreen
 })
 
-LinksStack.navigationOptions = {
-    tabBarLabel: 'Links',
-    tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-            focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-        />
-    )
-}
-
 const SettingsStack = createStackNavigator({
     Settings: SettingsScreen
 })
 
-SettingsStack.navigationOptions = {
-    tabBarLabel: 'Settings',
-    tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-            focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-        />
-    )
-}
-
-export default createBottomTabNavigator({
+const stacks = {
     HomeStack,
     HelpStack,
     LinksStack,
     SettingsStack
-})
+}
+
+const tabOptions = {
+    HomeStack: {
+        icon: Platform.OS === 'ios' ? 'ios-home' : 'md-home',
+        text: '主页'
+    },
+    HelpStack: {
+        icon: Platform.OS === 'ios' ? 'ios-information-circle-outline' : 'md-information-circle',
+        text: 'Help'
+    },
+    LinksStack: {
+        icon: Platform.OS === 'ios' ? 'ios-link' : 'md-link',
+        text: 'Link'
+    },
+    SettingsStack: {
+        icon: Platform.OS === 'ios' ? 'ios-options' : 'md-options',
+        text: 'Settings'
+    }
+}
+
+const options = {
+    defaultNavigationOptions: ({ navigation }) => {
+        const { state } = navigation
+        const { routeName } = state
+        const tabBar = tabOptions[routeName]
+        return {
+            tabBarLabel: tabBar.text,
+            tabBarIcon: ({ focused, horizontal, tintColor }) => {
+                return <TabBarIcon focused={focused} name={tabBar.icon}/>
+            }
+        }
+    },
+    tabBarOptions: {
+        activeTintColor: PALETTE.tabIconSelected,
+        inactiveTintColor: PALETTE.tabIconDefault
+    }
+}
+
+export const MainTabNavigator = createBottomTabNavigator(stacks, options)

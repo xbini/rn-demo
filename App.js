@@ -4,6 +4,7 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native'
 import NativeTachyons from 'react-native-style-tachyons'
 import { AppLoading, Asset, Font, Icon } from 'expo'
 import AppNavigator from './navigation/app-navigator'
+import { setTopLevelNavigator } from './navigation/navigation-service'
 
 NativeTachyons.build({}, StyleSheet)
 
@@ -13,6 +14,7 @@ export default class App extends React.Component {
     }
 
     render() {
+        const navigator = navigatorRef => setTopLevelNavigator(navigatorRef)
         if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
             return (
                 <AppLoading
@@ -25,7 +27,7 @@ export default class App extends React.Component {
             return (
                 <View style={styles.container}>
                     {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
-                    <AppNavigator/>
+                    <AppNavigator  ref={navigator}/>
                 </View>
             )
         }

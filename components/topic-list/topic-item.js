@@ -13,6 +13,7 @@ import {
 import { styles as commonStyles } from 'react-native-style-tachyons'
 import moment from 'moment'
 import Badge from './badge'
+import { navigate } from '../../navigation/navigation-service'
 
 const styles = StyleSheet.create({
     title: {
@@ -33,11 +34,13 @@ export default class TopicItem extends React.Component {
 
     state = {}
 
-    _goDetail(id) {
+    _goDetail(id, title) {
+        const { navigation: { navigate } } = this.props
+        navigate('TopicDetail', { id, title })
     }
 
     render() {
-        const { author, title, reply_count, create_at, top, tab, good, visit_count } = this.props.data
+        const { id, author, title, reply_count, create_at, top, tab, good, visit_count } = this.props.data
         const { aic, f5, h3, w3, mb2, mr2, mt1, mb1, pa2, jcsb, flx_i, flx_row } = commonStyles
         const item = (
             <View style={[flx_row, aic, mb2, pa2]}>
@@ -59,12 +62,12 @@ export default class TopicItem extends React.Component {
         )
         const platform = {
             android: (
-                <TouchableNativeFeedback onPress={this._goDetail.bind(this, title)}>
+                <TouchableNativeFeedback onPress={this._goDetail.bind(this, id, title)}>
                     {item}
                 </TouchableNativeFeedback>
             ),
             ios: (
-                <TouchableOpacity onPress={this._goDetail.bind(this, title)}>
+                <TouchableOpacity onPress={this._goDetail.bind(this, id, title)}>
                     {item}
                 </TouchableOpacity>
             )
