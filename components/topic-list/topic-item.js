@@ -35,11 +35,10 @@ export default class TopicItem extends React.Component {
     state = {}
 
     _goDetail(id, title) {
-        const { navigation: { navigate } } = this.props
-        navigate('TopicDetail', { id, title })
     }
 
     render() {
+        const { onClick } = this.props
         const { id, author, title, reply_count, create_at, top, tab, good, visit_count } = this.props.data
         const { aic, f5, h3, w3, mb2, mr2, mt1, mb1, pa2, jcsb, flx_i, flx_row } = commonStyles
         const item = (
@@ -62,12 +61,12 @@ export default class TopicItem extends React.Component {
         )
         const platform = {
             android: (
-                <TouchableNativeFeedback onPress={this._goDetail.bind(this, id, title)}>
+                <TouchableNativeFeedback onPress={() => onClick({ id, title })}>
                     {item}
                 </TouchableNativeFeedback>
             ),
             ios: (
-                <TouchableOpacity onPress={this._goDetail.bind(this, id, title)}>
+                <TouchableOpacity onPress={() => onClick({ id, title })}>
                     {item}
                 </TouchableOpacity>
             )

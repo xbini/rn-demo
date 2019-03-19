@@ -12,7 +12,7 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/styled-text/styled-text';
 
-export default class HelpScreen extends React.Component {
+export default class Help extends React.Component {
   static navigationOptions = {
     header: null,
   };

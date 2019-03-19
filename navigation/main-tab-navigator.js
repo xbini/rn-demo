@@ -3,26 +3,28 @@ import { Platform } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 
 import TabBarIcon from '../components/tab-bar-icon/tab-bar-icon'
-import HomeScreen from '../screens/home-screen'
-import HelpScreen from '../screens/help-screen'
-import LinksScreen from '../screens/links-screen'
-import SettingsScreen from '../screens/settings-screen'
 import { PALETTE } from '../theme/theme'
+import { TopicDetail } from '../pages/topic-detail'
+import Home from '../pages/home'
+import Settings from '../pages/settings'
+import Links from '../pages/links'
+import Help from '../pages/help'
 
 const HomeStack = createStackNavigator({
-    Home: HomeScreen
+    Home,
+    TopicDetail
 })
 
 const HelpStack = createStackNavigator({
-    Help: HelpScreen
+    Help
 })
 
 const LinksStack = createStackNavigator({
-    Links: LinksScreen
+    Links
 })
 
 const SettingsStack = createStackNavigator({
-    Settings: SettingsScreen
+    Settings
 })
 
 const stacks = {

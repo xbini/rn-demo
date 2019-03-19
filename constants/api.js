@@ -1,4 +1,5 @@
 const API_PREFIX = 'https://cnodejs.org/api/v1'
 export const API = {
-    TOPICS: `${API_PREFIX}/topics`
+    TOPICS_LIST: `${API_PREFIX}/topics`,
+    TOPIC: `${API_PREFIX}/topic/:id`
 }
