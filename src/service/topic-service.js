@@ -1,4 +1,4 @@
-import { API } from '../../constants/api'
+import { API } from '../constants/api'
 
 export const getTopics = (params = {}) => {
     return fetch(API.TOPICS_LIST, { method: 'GET', params })

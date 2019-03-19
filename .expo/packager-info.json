@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 11661,
-  "expoServerNgrokUrl": "https://9g-2dg.luobin.rn-demo.exp.direct",
-  "packagerNgrokUrl": "https://packager.9g-2dg.luobin.rn-demo.exp.direct",
-  "ngrokPid": 11680,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }

@@ -1,4 +1,4 @@
-node_modules/
-__test__/__snapshots__/
 .expo/
 .idea/
+node_modules/
+__test__/__snapshots__/
