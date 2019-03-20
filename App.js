@@ -13,6 +13,11 @@ export default class App extends React.Component {
         isLoadingComplete: false
     }
 
+    componentDidMount() {
+        console.log(this)
+        StatusBar.setBarStyle('light-content')
+    }
+
     render() {
         const navigator = navigatorRef => setTopLevelNavigator(navigatorRef)
         if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {

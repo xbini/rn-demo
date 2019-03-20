@@ -13,7 +13,6 @@ import {
 import { styles as commonStyles } from 'react-native-style-tachyons'
 import moment from 'moment'
 import Badge from './badge'
-import { navigate } from '../../navigation/navigation-service'
 
 const styles = StyleSheet.create({
     title: {

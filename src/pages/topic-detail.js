@@ -1,7 +1,7 @@
 import React from 'react'
-import { WebView } from 'react-native'
+import { WebView, View, Text } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
-import { generateNavigationOptions } from '../constants/utils'
+import { generateNavigationOptions, generateTopicDetailHtml } from '../constants/utils'
 import { getTopic } from '../service/topic-service'
 import LoadingView from '../components/loading-view'
 
@@ -17,9 +17,27 @@ export class TopicDetail extends React.Component {
         const { navigation } = this.props
         const id = navigation.getParam('id')
         this.setState({ loading: true })
-        return getTopic(id, { mdrender: false })
-            .then(data => this.setState({ topic: data }))
+        return getTopic(id, { mdrender: true })
+            .then(({ data }) => this.setState({ topic: data }))
             .finally(() => this.setState({ loading: false }))
+    }
+
+    _renderTopic() {
+        const { topic } = this.state
+        if (topic) {
+            const source = {
+                html: generateTopicDetailHtml(topic)
+            }
+            return (
+                <WebView originWhitelist={['*']}
+                         mixedContentMode={'always'}
+                         useWebKit={true}
+                         source={source}/>
+            )
+        }
+        return (
+            <View><Text>error</Text></View>
+        )
     }
 
     componentDidMount() {
@@ -27,9 +45,10 @@ export class TopicDetail extends React.Component {
     }
 
     render() {
+        const { loading } = this.state
         return (
-            <LoadingView loading={this.state.loading}>
-                <WebView>{'22s'}</WebView>
+            <LoadingView loading={loading}>
+                {this._renderTopic()}
             </LoadingView>
         )
     }
